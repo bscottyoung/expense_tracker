@@ -1,0 +1,8 @@
+<h1>Add a Transaction</h1>
+
+<%= render 'form' %>
+<% if current_user %>
+	<%= link_to 'Add new expense item, new_expense_path' %>
+	<%= link to 'Add new expense class, new_exp_type_path' %>
+	<%= link_to 'Add new vendor', new_vendor_path %>
+<% end %>

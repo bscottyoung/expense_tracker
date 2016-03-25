@@ -1,0 +1,64 @@
+<% if @character.errors.any? %>
+	<div id="error_explanation">
+    	<h3><%= pluralize(@character.errors.count, "error") %> prohibited this new character from being saved:</h3>
+	      <ul>
+	      	<% @character.errors.full_messages.each do |message| %>
+	        	<li><%= message %></li>
+	      	<% end %>
+	      </ul>
+	</div>
+<% end %>
+
+<%= form_for @transaction, html: {multipart: true} do |f| %>
+	<div><%= f.lable :month %>
+	<%= f.text_field :month %></div>
+
+	<div><%= f.lable :year %>
+	<%= f.text_field :year %></div>
+
+	<div><%= f.lable :vendor.name, "Vendor Name" %>
+	<%= collection_select(:transaction, :vendor_id, Vendor.all, :id, :name, include_blank: true) %></div>
+
+	<div><%= f.lable :expense.name, "Expense" %>
+	<%= collection_select(:transaction, :expense_id, Expense.all, :id, :name, include_blank: true) %></div>
+
+	<div><%= f.lable :exp_group.name, "Expense Class" %>
+	<%= collection_select(:transaction, :exp_group_id, Exp_Group.all, :id, :name, include_blank: true) %></div>
+
+	<div><%= f.lable :descr, Transaction Description %>
+	<%= f.text_field :descr %></div>
+
+	<div><%= f.lable :amt, "Amount" %>
+	<%= f.text_field :amt %></div>
+
+	<div><%= f.lable :taxable_flag, "Check if taxable" %>
+		<%= ??  %></div>
+
+	<div><%= f.lable :photo_receipt, "Receipt Image (png, jpg, gif)" %>
+	<%= f.file_field :photo_receipt %></div>
+
+<% f.submit, 'Save Transaction' %>
+
+<% end %>
+
+
+<p>Expense Account Actions
+	<ul>
+		<li><%= link_to 'Add new expense item', new_expense_path, :target=>"_blank" %></li>
+		<li><%= link_to 'Edit expenses', expenses_path, :target=>"_blank" %></li>
+	</ul>
+</p>
+
+<p>Expense Group Actions
+	<ul>
+		<li><%= link to 'Add new expense group', new_exp_group_path, :target=>"_blank" %></li>
+		<li><%= link_to 'Edit expense groups', exp_groups_path, :target=>"_blank" %></li>
+	</ul>
+</p>
+
+<p>Vendor Actions
+	<ul>
+		<li><%= link to 'Add new vendor', new_vendor_path, :target=>"_blank" %></li>
+		<li><%= link_to 'Edit vendors', vendors_path, :target=>"_blank" %></li>
+	</ul>
+</p>

@@ -1,0 +1,46 @@
+<h1>Transactions Home</h1>
+
+
+
+
+<p><%= 'link_to Add New Transaction', new_transaction_path %></p>
+
+<p>
+	<%#= form_tag("/search", method: "get") do %>
+	<%= form_tag transactions_path, method: :get do%>
+	  <%= label_tag(:search, "Search for:") %>
+	  <%= text_field_tag :search %>
+	  <%= submit_tag "Search" %>
+	<% end %>	
+</p>
+
+<table>
+	<tr>
+		<th></th>
+		<th>Date</th>
+		<th>Expense Group</th>
+		<th>Expense Account</th>
+		<th>Transaction Description</th>
+		<th>Vendor</th>
+		<th>Amount</th>
+		<th>Edit</th>
+		<th>delete</th>
+	</tr>
+
+	<tr>
+		<% @transactions.each do |transaction| %>
+			<td><%= image_tag transaction.photo.url(:small) %></td>
+			<td><%= "#{transaction.month}-#{transaction.year}" %></td>
+			
+			<td><%= transaction.expense.exp_group.name %></td>
+			<td><%= transaction.expense.name %></td>
+			<td><%= transaction.desc %></td>
+			<td><%= transaction.vendor.name %></td>
+			<td><%= link_to transaction.amt, transaction_path(transaction%></td>
+			<% if current_user %>
+				<td><%= link_to 'edit', transaction_path(transaction), :target=>"_top" %></td>
+				<td><%= link_to 'delete', transaction_path(transaction), method: :delete, data: {Confirm: "Are you sure you want to delete?  This action is permenant."} %></td>
+			<% end %>
+	</tr>
+
+</table>
