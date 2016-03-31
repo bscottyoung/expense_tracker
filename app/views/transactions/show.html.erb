@@ -1,57 +1,63 @@
-<h1>Transaction Detail</h1>
 
-<% if @character.errors.any? %>
-	<div id="error_explanation">
-    	<h3><%= pluralize(@character.errors.count, "error") %> prohibited this new character from being saved:</h3>
-	      <ul>
-	      	<% @character.errors.full_messages.each do |message| %>
-	        	<li><%= message %></li>
-	      	<% end %>
-	      </ul>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Transaction Detail</h1>
+
+		<% if @transaction.errors.any? %>
+			<div id="error_explanation">
+		    	<h3><%= pluralize(@character.errors.count, "error") %> prohibited this new transaction from being saved:</h3>
+			      <ul>
+			      	<% @transaction.errors.full_messages.each do |message| %>
+			        	<li><%= message %></li>
+			      	<% end %>
+			      </ul>
+			</div>
+		<% end %>
 	</div>
-<% end %>
-<div><%= image_tag @transaction.photo.url(:thumb)%></div>
-<table>
-	<tr>
-		<th>Month:  </th>
-		<th>Year:</th>
-		<th>Vendor:</th>
-		<th>Expense Group:</th>
-		<th>Expense Acct:</th>
-		<th>Transaction Description:</th>
-		<th>Amount</th>
-	</tr>
+</div>
 
-	<tr>
-		<td> <%= @transaction.month %></td>
-		<td> <%= @transaction.year %></td>
-		<td> <%= @transaction.vendor.name %></td>
-		<td> <%= @transaction.exp_group.name %></td>
-		<td> <%= @transaction.expense.name %></td>
-		<td> <%= @transaction.descr %></td>
-		<td>Amount: <%= @transaction.amt %></td>
-	</tr>
-</table>
+<div class="row">
+	<div class="col-md-6">
+		<table>
+			<tr>
+				<td>Date: <%= @transaction.tdate %></td>
+			</tr>
+			<tr>
+				<td>Vendor: <%= @transaction.vendor.name %></td>
+			</tr>
+			<tr>
+				<td>Expense Group: <%= @transaction.exp_group.name %></td>
+			</tr>
+			<tr>
+				<td>Expense Account: <%= @transaction.expense.name %></td>
+			</tr>
+			<tr>
+				<td>Description: <%= @transaction.desc %></td>
+			</tr>
+			<tr>
+				<td>Amount: <%= @transaction.amt %></td>
+			</tr>
+			<tr>
+				<%# if taxable_flag %>
+				<td>Taxable: <%#= @transaction.taxable_flag %></td>
+				<%# end %>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<p>Receipt</p>
+		<%= image_tag @transaction.photo_receipt.url(:medium)%>
+	</div>
+</div>
 
-<div><%= link_to "Return to ALL Transactions, transactions_path" %></div>
-<% if current_user %>
-	<p>Expense Items Actions
+<%# if current_user %>
+<!-- 	<table>
+	<tr><u>Additional Actions</u></tr>
 		<ul>
-			<li><%= link_to 'Add new expense account', new_expense_path, :target=>"_blank" %></li>
-			<li><%= link_to 'Edit an expense account', expenses_path, :target=>"_blank" %></li>
+			<li><%= link_to 'Transactions', transactions_path %></li>
+			<li><%= link_to 'Expense Items', expenses_path %></li>
+			<li><%= link_to 'Expense Groups', exp_groups_path %></li>
+			<li><%= link_to 'Vendors', vendors_path %></li>
 		</ul>
-	</p>
-
-	<p>Expense Group Actions
-		<ul>
-			<li><%= link to 'Add new expense group', new_exp_group_path, :target=>"_blank" %></li>
-			<li><%= link_to 'Edit an expense group', exp_groups_path, :target=>"_blank" %></li>
-		</ul>
-	</p>
-
-	<p>Actions Actions
-		<ul>
-			<li><%= link to 'Add a new vendor', new_vendor_path, :target=>"_blank" %></li>
-			<li><%= link_to 'Edit a vendor', vendors_path, :target=>"_blank" %></li>
-		</ul>
-	</p>
+</table> -->
+	<%# end  %>

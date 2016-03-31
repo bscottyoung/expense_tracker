@@ -1,2 +1,52 @@
-<h1>Vendor#index</h1>
-<p>Find me in app/views/vendor/index.html.erb</p>
+<div class="row">
+	<div class="col-md-12">
+
+		<h2>Vendor Listing</h2>
+
+		<%= form_tag vendors_path, method: :get do%>
+			<%= label_tag(:search, "Search for:") %>
+			<%= text_field_tag :search %>
+			<%= submit_tag "Search" %>
+		<% end %>	
+		<%# if current-user %>	
+			<%= link_to 'Add New Vendor', new_vendor_path %>
+		<%# end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-8">
+		<table class="table table-striped">
+			<tr>
+				<th>Name</th>
+				<th>Expense Group</th>
+				<th>Expense Item</th>
+			</tr>
+			<% @vendors.each do |vendor| %>
+			<tr>
+		 		<td><%= vendor.name %></td>
+		 		<td><%= vendor.exp_group.try(:name) %></td>
+		 		<td><%= vendor.expense.try(:name) %></td>
+
+				<%# if current_user %>
+					<td><%= link_to 'edit', edit_vendor_path(vendor) %></td>
+					<td> </td>
+					<td><%= link_to 'delete', vendor_path(vendor), method: :delete, data: {Confirm: "Are you sure you want to delete?  This action is permenant."} %></td>
+				<%# end %>
+			<% end %>
+			</tr>
+			<tr></tr>
+		</table>
+	</div>
+</div>
+<br>
+<!-- <table>
+<tr>Additional Actions</tr>
+<ul>
+	<li><%= link_to 'Return to Transactions', transactions_path %></li>
+	<li><%= link_to 'Expense Group Listing', exp_groups_path %></li>
+	<li><%= link_to 'Expense Item Listing', expenses_path %></li>
+
+</table>
+ -->
+

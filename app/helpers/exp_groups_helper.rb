@@ -1,2 +1,2 @@
-module ExpTypesHelper
+module ExpGroupsHelper
 end

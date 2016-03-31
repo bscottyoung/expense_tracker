@@ -1,64 +1,68 @@
-<% if @character.errors.any? %>
-	<div id="error_explanation">
-    	<h3><%= pluralize(@character.errors.count, "error") %> prohibited this new character from being saved:</h3>
-	      <ul>
-	      	<% @character.errors.full_messages.each do |message| %>
-	        	<li><%= message %></li>
-	      	<% end %>
-	      </ul>
+<div class="row">
+	<div class="col-md-12">
+		<% if @transaction.errors.any? %>
+			<div id="error_explanation">
+		    	<h3><%= pluralize(@transaction.errors.count, "error") %> prohibited this new transaction from being saved:</h3>
+			    <ul>
+			      <% @tran.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			    </ul>
+			</div>
+		<% end %>
 	</div>
-<% end %>
-
-<%= form_for @transaction, html: {multipart: true} do |f| %>
-	<div><%= f.lable :month %>
-	<%= f.text_field :month %></div>
-
-	<div><%= f.lable :year %>
-	<%= f.text_field :year %></div>
-
-	<div><%= f.lable :vendor.name, "Vendor Name" %>
-	<%= collection_select(:transaction, :vendor_id, Vendor.all, :id, :name, include_blank: true) %></div>
-
-	<div><%= f.lable :expense.name, "Expense" %>
-	<%= collection_select(:transaction, :expense_id, Expense.all, :id, :name, include_blank: true) %></div>
-
-	<div><%= f.lable :exp_group.name, "Expense Class" %>
-	<%= collection_select(:transaction, :exp_group_id, Exp_Group.all, :id, :name, include_blank: true) %></div>
-
-	<div><%= f.lable :descr, Transaction Description %>
-	<%= f.text_field :descr %></div>
-
-	<div><%= f.lable :amt, "Amount" %>
-	<%= f.text_field :amt %></div>
-
-	<div><%= f.lable :taxable_flag, "Check if taxable" %>
-		<%= ??  %></div>
-
-	<div><%= f.lable :photo_receipt, "Receipt Image (png, jpg, gif)" %>
-	<%= f.file_field :photo_receipt %></div>
-
-<% f.submit, 'Save Transaction' %>
-
-<% end %>
+</div>
 
 
-<p>Expense Account Actions
-	<ul>
-		<li><%= link_to 'Add new expense item', new_expense_path, :target=>"_blank" %></li>
-		<li><%= link_to 'Edit expenses', expenses_path, :target=>"_blank" %></li>
-	</ul>
-</p>
+<div class="row">
+	<div class="col-md-6">
+		<%#= form_for @transaction, html: {multipart: true} do |f| %>
+		<%= form_for @transaction do |f| %>
+			<div><%= f.label :tdate, "Date"%>
+			<%= f.text_field :tdate %></div>
 
-<p>Expense Group Actions
-	<ul>
-		<li><%= link to 'Add new expense group', new_exp_group_path, :target=>"_blank" %></li>
-		<li><%= link_to 'Edit expense groups', exp_groups_path, :target=>"_blank" %></li>
-	</ul>
-</p>
+			<div><%= f.label :vendor, "Vendor Name" %>
+			<%= collection_select(:transaction, :vendor_id, Vendor.all, :id, :name, include_blank: true) %>
+			<%= link_to 'Add new vendor', new_vendor_path %></div>
 
-<p>Vendor Actions
-	<ul>
-		<li><%= link to 'Add new vendor', new_vendor_path, :target=>"_blank" %></li>
-		<li><%= link_to 'Edit vendors', vendors_path, :target=>"_blank" %></li>
-	</ul>
-</p>
+			<div><%= f.label :expense, "Expense Account" %>
+			<%= collection_select(:transaction, :expense_id, Expense.all, :id, :name, include_blank: true) %></div>
+
+			<div><%= f.label :exp_group, "Expense Category" %>
+			<%= collection_select(:transaction, :exp_group_id, ExpGroup.all, :id, :name, include_blank: true) %></div>
+
+			<div><%= f.label :desc, 'Transaction Description' %>
+			<%= f.text_field :desc %></div>
+
+			<div><%= f.label :amt, "Amount" %>
+			<%= f.text_field :amt %></div>
+
+			<div><%#= f.label_tag :taxable_flag, "Check if taxable" %>
+			<%#= f.check_box_tag :taxable_flag  %></div>
+
+			<div>
+				<table>
+					<br>
+					<tr><%= f.file_field :photo_receipt %></tr>
+					<tr><%= f.label :photo_receipt, "Receipt Image (png, jpg, gif, tiff)" %></tr>
+				</table>
+			</div>
+			<br>
+			<div><%= f.submit %></div>
+
+		<% end %>
+	</div>
+	<div class="col-md-6">
+		<p>Receipt</p>
+		<%= image_tag @transaction.photo_receipt.url(:medium)%>
+	</div>
+</div>
+<!-- <table>
+	<tr><u>Additional Actions</u></tr>
+		<ul>
+			<li><%= link_to 'Return to Transactions', transactions_path %></li>	<li><%= link_to 'Expense Items', expenses_path %></li>
+			<li><%= link_to 'Expense Groups', exp_groups_path %></li>
+			<li><%= link_to 'Vendors', vendors_path %></li>
+		</ul>
+</table>
+ -->

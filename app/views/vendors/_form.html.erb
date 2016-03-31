@@ -1,0 +1,47 @@
+<% if @vendor.errors.any? %>
+	<div id="error_explanation">
+    	<h3><%= pluralize(@vendor.errors.count, "error") %> prohibited this new vendor from being saved:</h3>
+	      <ul>
+	      	<% @vendor.errors.full_messages.each do |message| %>
+	        	<li><%= message %></li>
+	      	<% end %>
+	      </ul>
+	</div>
+<% end %>
+
+<%#= form_for @transaction, html: {multipart: true} do |f| %>
+<table>
+	<tr>
+	<%= form_for @vendor do |f| %>
+		<td><%= f.label :name, "Vendor Name"%></td>
+		<td><%= f.text_field :name %></td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :exp_group, "Expense Category" %></td>
+		<td><%= f.collection_select(:exp_group_id, ExpGroup.all, :id, :name, include_blank: true) %></td>
+
+	<tr>
+		<td><%= f.label :expense, "Expense Account" %></td>
+		<td><%= f.collection_select(:expense_id, Expense.all, :id, :name, include_blank: true) %></td>
+	</tr>
+
+	<br>
+	<tr>
+		<td><%= f.submit 'Save Vendor'%></td>
+	</tr>
+	<% end %>
+</table>
+<br>
+<!-- <p>Other Actions
+	<ul>
+		<li><%= link_to 'Return to Vendors', vendors_path %></li>
+		<li><%= link_to 'Transactions', transactions_path %></li>
+		<li><%= link_to 'Expense Groups', exp_groups_path %></li>
+		<li><%= link_to 'Expense Items', expenses_path %></li>
+
+
+	</ul>
+</p> -->
+
+

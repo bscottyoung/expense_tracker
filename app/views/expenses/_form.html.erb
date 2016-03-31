@@ -1,0 +1,33 @@
+<% if @expense.errors.any? %>
+	<div id="error_explanation">
+    	<h3><%= pluralize(@expense.errors.count, "error") %> prohibited this new expense item from being saved:</h3>
+	      <ul>
+	      	<% @expense.errors.full_messages.each do |message| %>
+	        	<li><%= message %></li>
+	      	<% end %>
+	      </ul>
+	</div>
+<% end %>
+
+<%#= form_for @transaction, html: {multipart: true} do |f| %>
+<%= form_for @expense do |f| %>
+	<div><%= f.label :name, "Expense Item Name"%>
+	<%= f.text_field :name %></div>
+
+	<div><%= f.label :exp_group, "Expense Category" %>
+	<%= collection_select(:expense, :exp_group_id, ExpGroup.all, :id, :name, include_blank: true) %></div>
+
+	<%= f.submit %>
+
+<% end %>
+
+<!-- <table>
+	<tr><u>Additional Actions</u></tr>
+		<ul>
+			<li><%= link_to 'Return to Expense Items', expenses_path %></li>
+			<li><%= link_to 'Transactions', transactions_path %></li>		
+			<li><%= link_to 'Expense Groups', exp_groups_path %></li>
+			<li><%= link_to 'Vendors', vendors_path %></li>
+		</ul>
+</table>
+ -->

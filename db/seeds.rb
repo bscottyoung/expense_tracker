@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+transactions=Transaction.create([
+	{amt: '10.00', desc:'top off tank', tdate:'12012015', taxable_flag:'true', expense_id:'1', exp_group_id:'1', vendor_id:'1'}])
+vendors=Vendor.create([
+	{name:'Texaco'}])
+expenses=Expense.create([
+	{name:'gas', exp_group_id:'1'}])
+exp_groups=ExpGroup.create([
+	{name:'Auto Expenses'}])

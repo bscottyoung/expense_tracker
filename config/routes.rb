@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
-  get 'vendor/index'
+  resources :transactions
+  resources :exp_groups
+  resources :expenses
+  resources :transactions
+  resources :vendors
+  root 'transactions#index'
 
-  get 'years/index'
 
-  get 'month/index'
+  # get 'vendor/index'
+  # get 'month/index'
+  # get 'transaction/index'
+  # get 'expenses/index'
+  # get 'exp_types/index'
 
-  get 'transaction/index'
-
-  get 'expenses/index'
-
-  get 'exp_types/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

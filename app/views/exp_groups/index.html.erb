@@ -1,2 +1,44 @@
-<h1>ExpTypes#index</h1>
-<p>Find me in app/views/exp_types/index.html.erb</p>
+
+<div class="row">
+	<div class="col-md-12">
+		<h2>Expense Groups Listing</h2>
+
+
+		<%= form_tag exp_groups_path, method: :get do%>
+			<%= label_tag(:search, "Search for:") %>
+			<%= text_field_tag :search %>
+			<%= submit_tag "Search" %>
+		<% end %>	
+		<%= link_to 'Add New Expense Group', new_exp_group_path %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<table class="table table-striped">
+			<% @exp_groups.each do |exp_group| %>
+			<tr>
+		 		<td><%= exp_group.name %></td>
+
+				<%# if current_user %>
+					<td><%= link_to 'edit', edit_exp_group_path(exp_group) %></td>
+					<td> </td>
+					<td><%= link_to 'delete', exp_group_path(exp_group), method: :delete, data: {Confirm: "Are you sure you want to delete?  This action is permenant."} %></td>
+				<%# end %>
+			<% end %>
+			</tr>
+			<tr></tr>
+		</table>
+	</div>
+</div>
+<br>
+<table>
+<!-- <tr>Additional Actions</tr>
+<ul>
+	<li><%= link_to 'Transactions', transactions_path %></li>
+	<li><%= link_to 'Expense Items', expenses_path %></li>
+	<li><%= link_to 'Vendors', vendors_path %></li>
+
+</table>
+ -->
+

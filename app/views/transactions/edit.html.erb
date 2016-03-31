@@ -1,29 +1,4 @@
-<h1>Edit Transaction<j/h1>
+<h1>Edit Transaction</h1>
 
 <%= render 'form' %>
 
-<% if current_user %>
-	<p>Expense Items Actions
-		<ul>
-			<li><%= link_to 'Add new expense item', new_expense_path %></li>
-			<li><%= link_to 'Edit expenses', expenses_path %></li>
-		</ul>
-	</p>
-	
-	<p>Expense Group Actions
-		<ul>
-			<li><%= link to 'Add new expense group', new_exp_group_path %></li>
-			<li><%= link_to 'Edit expense groups', exp_groups_path %></li>
-		</ul>
-	</p>
-
-	<p>Actions Actions
-		<ul>
-			<li><%= link to 'Add new vendor', new_vendor_path %></li>
-			<li><%= link_to 'Edit vendors', vendors_path %></li>
-		</ul>
-	</p>
-
-
-
-<% end %>

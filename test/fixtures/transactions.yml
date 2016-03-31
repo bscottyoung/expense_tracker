@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amt: 1.5
+  desc: MyString
+  tdate: 
+  expense_id,: MyString
+  exp_group_id: MyString
+
+two:
+  amt: 1.5
+  desc: MyString
+  tdate: 
+  expense_id,: MyString
+  exp_group_id: MyString

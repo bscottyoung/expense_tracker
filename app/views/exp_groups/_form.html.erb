@@ -1,0 +1,29 @@
+<% if @exp_group.errors.any? %>
+	<div id="error_explanation">
+    	<h3><%= pluralize(@exp_group.errors.count, "error") %> prohibited this new expense group from being saved:</h3>
+	      <ul>
+	      	<% @exp_group.errors.full_messages.each do |message| %>
+	        	<li><%= message %></li>
+	      	<% end %>
+	      </ul>
+	</div>
+<% end %>
+
+<%#= form_for @transaction, html: {multipart: true} do |f| %>
+<%= form_for @exp_group do |f| %>
+	<div><%= f.label :name, "Expense Group Name"%>
+	<%= f.text_field :name %></div>
+
+	<%= f.submit 'Save Expense Group'%>
+
+<% end %>
+
+<!-- <table>
+<tr>Additional Actions</tr>
+<ul>
+	<li><%= link_to 'Return to Expense Groups', exp_groups_path %></li>
+	<li><%= link_to 'Transactions', transactions_path %></li>
+	<li><%= link_to 'Expense Items', expenses_path %></li>
+	<li><%= link_to 'Vendors', vendors_path %></li>
+
+</table> -->
