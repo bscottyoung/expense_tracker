@@ -5,7 +5,7 @@ class ExpGroup < ActiveRecord::Base
 
 	def self.search(term)
 		if term
-			self.where("vendor.name LIKE ?", "%#{term}%")
+			self.where("name LIKE ?", "%#{term}%")
 		else
 			self.all
 		end
