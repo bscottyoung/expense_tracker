@@ -35,7 +35,7 @@
 				<td>Description: <%= @transaction.desc %></td>
 			</tr>
 			<tr>
-				<td>Amount: <%= @transaction.amt %></td>
+				<td>Amount: <%= number_to_currency(@transaction.amt) %></td>
 			</tr>
 			<tr>
 				<%# if taxable_flag %>

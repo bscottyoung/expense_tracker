@@ -22,7 +22,7 @@
 				<th>Expense Group</th>
 				<th>Expense Item</th>
 			</tr>
-			<% @vendors.each do |vendor| %>
+			<% @vendors.sort{|a,b| a.name.downcase<=>b.name.downcase}.each do |vendor| %>
 			<tr>
 		 		<td><%= vendor.name %></td>
 		 		<td><%= vendor.exp_group.try(:name) %></td>

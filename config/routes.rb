@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :transactions
   resources :exp_groups
   resources :expenses
-  resources :transactions
   resources :vendors
   root 'transactions#index'
 

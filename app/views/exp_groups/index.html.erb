@@ -16,7 +16,7 @@
 <div class="row">
 	<div class="col-md-6">
 		<table class="table table-striped">
-			<% @exp_groups.each do |exp_group| %>
+			<% @exp_groups.sort{|a,b| a.name.downcase<=>b.name.downcase}.each do |exp_group| %>
 			<tr>
 		 		<td><%= exp_group.name %></td>
 

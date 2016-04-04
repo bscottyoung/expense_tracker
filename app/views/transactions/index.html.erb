@@ -1,20 +1,30 @@
 
 <div class="row">
-	<div class="col-md-12">
-
+	<div class="col-md-6">
 		<h1>Transactions Home</h1>
-
+	</div>
+	
+	<div class="col-md-6">
 		<%= form_tag transactions_path, method: :get do%>
-			<%= label_tag(:search, "Search for:") %>
+			<%= label_tag(:search, "Search by Description:") %>
 			<%= text_field_tag :search %>
 			<%= submit_tag "Search" %>
 		<% end %>	
+		<%= form_tag transactions_path, method: :get do%>
+			<%= label_tag(:search1, "Search by Vendor:") %>
+			<%= text_field_tag :search1 %>
+			<%= submit_tag "Search" %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
 		<%# if current_user %>
 			<%= link_to 'Add New Transaction', new_transaction_path %>
 		<%# end %>
 	</div>
 </div>
-<br>
 
 <div class="row">
 	<div class="col-md-12">
@@ -28,17 +38,23 @@
 				<th>Vendor</th>
 				<th>Amount</th>
 			</tr>
-
-				<% @transactions.each do |transaction| %>
+<%# binding.pry %>
+				<% @transactions.sort{|a,b| b.tdate<=>a.tdate}.each do |transaction| %>
+				<%#binding.pry%>
 			<tr>
 				<td><%= image_tag transaction.photo_receipt.url(:small) %></td>
-				<%#= transaction.tdate.strftime("at %d-%m-%Y") %>
-				<td><%= transaction.tdate %></td>
+				<%#binding.pry%>
+				<td><%= "#{transaction.tdate.month}-#{transaction.tdate.day}-#{transaction.tdate.year}" if transaction.tdate.nil? == false%></td>
 		 		<td><%= transaction.exp_group.try(:name) %></td>
+		 		<%#binding.pry%>
 		 		<td><%= transaction.expense.try(:name) %></td>
-				<td><%= transaction.desc %></td>
+		 		<%#binding.pry%>
+				<td><%= transaction.try(:desc) %></td>
+				<%#binding.pry%>
 				<td><%= transaction.vendor.try(:name) %></td>
-				<td><%= link_to transaction.amt, transaction_path(transaction)%></td>
+				<%#binding.pry%>
+				<td><%= link_to number_to_currency(transaction.amt), transaction_path(transaction)%></td>
+				<%#binding.pry%>
 				<%# if current_user %>
 					<td><%= link_to 'edit', edit_transaction_path(transaction) %></td>
 					<td><%= link_to 'delete', transaction_path(transaction), method: :delete, data: {Confirm: "Are you sure you want to delete?  This action is permenant."} %></td>
