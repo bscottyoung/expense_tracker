@@ -51,13 +51,13 @@
 </div>
 
 <%# if current_user %>
-<!-- 	<table>
+<table>
 	<tr><u>Additional Actions</u></tr>
 		<ul>
-			<li><%= link_to 'Transactions', transactions_path %></li>
-			<li><%= link_to 'Expense Items', expenses_path %></li>
-			<li><%= link_to 'Expense Groups', exp_groups_path %></li>
-			<li><%= link_to 'Vendors', vendors_path %></li>
-		</ul>
-</table> -->
+			<li><%= link_to 'Edit Transaction', edit_transaction_path(@transaction) %></li>
+<!-- 			<li><%#= link_to 'Expense Items', expenses_path %></li>
+			<li><%#= link_to 'Expense Groups', exp_groups_path %></li>
+			<li><%#= link_to 'Vendors', vendors_path %></li>
+ -->		</ul>
+</table> 
 	<%# end  %>
