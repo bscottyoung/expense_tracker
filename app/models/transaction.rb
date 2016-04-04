@@ -20,16 +20,16 @@ class Transaction < ActiveRecord::Base
 			# binding.pry
 
 
-	def self.search1(term)
-			 binding.pry
-			if term
-				transactions = Vendor.where("name LIKE ?", "%#{term}%").map { |vendor| vendor.transactions }.flatten
-			# binding.pry
-			else
-				self.all
-			# binding.pry
-		end
-	end
+	# def self.search1(term)
+	# 		 binding.pry
+	# 		if term
+	# 			transactions = Vendor.where("name LIKE ?", "%#{term}%").map { |vendor| vendor.transactions }.flatten
+	# 		# binding.pry
+	# 		else
+	# 			self.all
+	# 		# binding.pry
+	# 	end
+	# end
 
 
 
